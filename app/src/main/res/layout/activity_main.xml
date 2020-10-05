@@ -28,6 +28,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="WLAN Test" />
+
+        <Button
+            android:id="@+id/buttonNW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Network Test" />
+
+        <Button
+            android:id="@+id/buttonProvision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sync Provision test" />
+
+        <Button
+            android:id="@+id/buttonDeProvision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sync DeProvision test" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

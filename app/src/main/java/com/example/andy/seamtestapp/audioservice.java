@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 
 
-public class service extends Service {
+public class audioservice extends Service {
     MediaPlayer musicPlayer;
     private static final String TAG = "SeamTestApp-Audio";
 

@@ -3,6 +3,7 @@
     package="com.example.andy.seamtestapp">
     <uses-permission android:name="android.Manifest.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="com.example.andy.seamtestapp.service"/>
+        <service android:name="com.example.andy.seamtestapp.audioservice"/>
         <service android:name="com.example.andy.seamtestapp.wlanservice"/>
+        <service android:name="com.example.andy.seamtestapp.networkservice"/>
+        <service android:name="com.example.andy.seamtestapp.syncservice"/>
     </application>
 
 </manifest>
