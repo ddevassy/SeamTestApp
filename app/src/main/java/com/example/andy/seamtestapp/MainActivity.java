@@ -15,7 +15,7 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mediastart, mediastop, checkwlan, checknw, syncprovision, syncdeprovision, brightness, volume;
+    private Button mediastart, mediastop, checkwlan, checknw, syncprovision, syncdeprovision, brightness, mutevolume, unmutevolume;
     private static final String TAG = "SeamTestApp";
     private EditText editText;
 
@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         syncprovision = (Button) findViewById(R.id.buttonProvision);
         syncdeprovision = (Button) findViewById(R.id.buttonDeProvision);
         brightness = (Button) findViewById(R.id.buttonBrightness);
-        volume = (Button) findViewById(R.id.buttonMute);
+        mutevolume = (Button) findViewById(R.id.buttonMute);
+        unmutevolume = (Button) findViewById(R.id.buttonUnMute);
 
         mediastart.setOnClickListener(this);
         mediastop.setOnClickListener(this);
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         syncprovision.setOnClickListener(this);
         syncdeprovision.setOnClickListener(this);
         brightness.setOnClickListener(this);
-        volume.setOnClickListener(this);
+        mutevolume.setOnClickListener(this);
+        unmutevolume.setOnClickListener(this);
 
         editText = (EditText) findViewById(R.id.editBrightness);
 
@@ -84,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, brightnessservice.class);
             intent.putExtra("editText", editText.getText().toString());
             startService(intent);
-        } else if (view == volume) {
-            Log.d(TAG,"Pressed volume Test Button" );
+        } else if (view == mutevolume) {
+            Log.d(TAG,"Pressed Mute volume Test Button" );
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (Settings.System.canWrite(this)) {
                     Log.d(TAG,"Already have the permission for Volume" );
@@ -99,6 +101,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             Intent intent = new Intent(this, volumeservice.class);
             startService(intent);
+        } else if (view == unmutevolume) {
+            Log.d(TAG,"Pressed volume Test Button" );
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.System.canWrite(this)) {
+                    Log.d(TAG,"Already have the permission for Volume" );
+                } else {
+                    Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                    intent.setData(Uri.parse("package:" + this.getPackageName()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    Log.d(TAG,"Setting up permission for Volume" );
+                }
+            }
+            Intent intent = new Intent(this, volumeservice.class);
+            stopService(intent);
         }
     }
 }

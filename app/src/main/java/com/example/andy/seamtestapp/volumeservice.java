@@ -5,7 +5,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.IBinder;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,25 +27,23 @@ public class volumeservice extends Service {
         audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG,"Volume Mute Service Test started" );
-        ContentResolver contentResolver = this.getContentResolver();
-        int originalMode = audioManager.getMode();
-        Toast.makeText(this, "Before Volume State " + originalMode, Toast.LENGTH_LONG).show();
-        audioManager.setMode(AudioManager.MODE_NORMAL);
-        boolean state = !audioManager.isMicrophoneMute();
 
-        audioManager.setMicrophoneMute(state);
+        audioManager.adjustVolume(AudioManager.ADJUST_MUTE, AudioManager.FLAG_PLAY_SOUND);
 
-        Toast.makeText(this, "After Volume Set to " + state, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "After Volume Set to " + AudioManager.ADJUST_MUTE, Toast.LENGTH_LONG).show();
         return START_STICKY;
     }
 
     @Override
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void onDestroy() {
-        Log.d(TAG,"Volume Service Test destroyed" );
+        Log.d(TAG,"Volume UnMute Service Test destroyed" );
         super.onDestroy();
+        audioManager.adjustVolume(AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_PLAY_SOUND);
         Toast.makeText(this, "Volume Service Test destroyed", Toast.LENGTH_LONG).show();
 
     }

@@ -38,6 +38,13 @@
             android:text="@string/mute_test" />
 
         <Button
+            android:id="@+id/buttonUnMute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="@string/unmute_test" />
+
+        <Button
             android:id="@+id/buttonWifi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

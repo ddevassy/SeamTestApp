@@ -9,5 +9,6 @@
     <string name="editBrightness"> </string>
     <string name="brightness">Brightness Set</string>
     <string name="editvolume"> </string>
-    <string name="mute_test">Volume Mute / UnMute TEST</string>
+    <string name="mute_test">Volume Mute TEST</string>
+    <string name="unmute_test">Volume UnMute TEST</string>
 </resources>
