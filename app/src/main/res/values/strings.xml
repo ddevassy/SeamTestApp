@@ -8,4 +8,6 @@
     <string name="sync_deprovision_test">Sync DeProvision test</string>
     <string name="editBrightness"> </string>
     <string name="brightness">Brightness Set</string>
+    <string name="editvolume"> </string>
+    <string name="mute_test">Volume Mute / UnMute TEST</string>
 </resources>

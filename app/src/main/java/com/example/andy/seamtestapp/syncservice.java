@@ -24,7 +24,7 @@ public class syncservice extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG,"Sync Service Test started" );
-        Toast.makeText(this, "Sync Service Test - NotImplemented", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Sync Provision Test - NotImplemented", Toast.LENGTH_LONG).show();
         return START_STICKY;
     }
 
@@ -32,7 +32,7 @@ public class syncservice extends Service {
     public void onDestroy() {
         Log.d(TAG,"Sync Service Test destroyed" );
         super.onDestroy();
-        Toast.makeText(this, "Sync Service Test - NotImplemented", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Sync Provision Test - NotImplemented", Toast.LENGTH_LONG).show();
 
     }
 }
