@@ -1,17 +1,22 @@
 package com.example.andy.seamtestapp;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mediastart, mediastop, checkwlan, checknw, syncprovision, syncdeprovision;
+    private Button mediastart, mediastop, checkwlan, checknw, syncprovision, syncdeprovision, brightness;
     private static final String TAG = "SeamTestApp";
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checknw = (Button) findViewById(R.id.buttonNW);
         syncprovision = (Button) findViewById(R.id.buttonProvision);
         syncdeprovision = (Button) findViewById(R.id.buttonDeProvision);
-
+        brightness = (Button) findViewById(R.id.buttonBrightness);
 
         mediastart.setOnClickListener(this);
         mediastop.setOnClickListener(this);
@@ -32,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checknw.setOnClickListener(this);
         syncprovision.setOnClickListener(this);
         syncdeprovision.setOnClickListener(this);
+        brightness.setOnClickListener(this);
+
+        editText = (EditText) findViewById(R.id.editBrightness);
+
         Log.d(TAG,"On onCreate" );
 
     }
@@ -50,13 +59,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view == checknw) {
             Log.d(TAG,"Pressed NetWork Test Button" );
             startService(new Intent(this, networkservice.class));
-        }else if (view == syncprovision) {
+        } else if (view == syncprovision) {
             Log.d(TAG,"Pressed Sync Provision Test Button" );
             startService(new Intent(this, syncservice.class));
-        }else if (view == syncdeprovision) {
+        } else if (view == syncdeprovision) {
             Log.d(TAG,"Pressed Sync DeProvision Test Button" );
             startService(new Intent(this, syncservice.class));
+        } else if (view == brightness) {
+            Log.d(TAG,"Pressed brightness Test Button" );
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.System.canWrite(this)) {
+                    Log.d(TAG,"Already have the permission for Brightness" );
+                } else {
+                    Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                    intent.setData(Uri.parse("package:" + this.getPackageName()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    Log.d(TAG,"Setting up permission for Brightness" );
+                }
+            }
+            Intent intent = new Intent(this, brightnessservice.class);
+            intent.putExtra("editText", editText.getText().toString());
+            startService(intent);
         }
     }
-
 }

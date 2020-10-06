@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.andy.seamtestapp">
     <uses-permission android:name="android.Manifest.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +25,7 @@
         <service android:name="com.example.andy.seamtestapp.wlanservice"/>
         <service android:name="com.example.andy.seamtestapp.networkservice"/>
         <service android:name="com.example.andy.seamtestapp.syncservice"/>
+        <service android:name="com.example.andy.seamtestapp.brightnessservice"/>
     </application>
 
 </manifest>
